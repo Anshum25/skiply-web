@@ -1,0 +1,18 @@
+:root {
+  /* Fonts */
+  --font-primary: "Roboto Flex", sans-serif;
+
+  /* Colors - Light, professional palette */
+  --color-primary: #0A0A0A;
+  --color-secondary: #011627;
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-white: #ffffff;
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --radius-md: 15px;
+}
