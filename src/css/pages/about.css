@@ -4,11 +4,10 @@
 .about-page {
   min-height: 100vh;
   background:
-    var(--grad-gold),
-    var(--side-gold-left),
-    var(--side-gold-right);
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
+    radial-gradient(900px 600px at 0% 40%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0.10) 30%, rgba(59, 130, 246, 0.00) 65%),
+    radial-gradient(900px 600px at 100% 35%, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.08) 30%, rgba(59, 130, 246, 0.00) 65%);
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
   padding: 40px 0;
 }
 
