@@ -8,7 +8,12 @@
 
 body {
   font-family: var(--font-primary);
-  background-color: var(--color-bg);
+  background:
+    var(--bg-base),
+    var(--bg-side-left),
+    var(--bg-side-right);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
   color: var(--color-text);
   line-height: 1.6;
 }
@@ -27,5 +32,5 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f9fb;
+  background: transparent;
 }

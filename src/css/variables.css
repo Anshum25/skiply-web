@@ -10,6 +10,36 @@
   --color-muted: #6b7280;
   --color-border: #e5e7eb;
   --color-white: #ffffff;
+  
+  /* Global layered background (calm, left/right emphasis) */
+  --bg-base: #ffffff;
+  --bg-side-left: radial-gradient(900px 600px at 0% 50%, rgba(99, 102, 241, 0.20) 0%, rgba(99, 102, 241, 0) 60%);
+  --bg-side-right: radial-gradient(900px 600px at 100% 50%, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 60%);
+
+  /* Themed base gradients for pages */
+  --grad-neutral: #ffffff;
+  --grad-blue: #ffffff;
+  --grad-red: #ffffff;
+  --grad-green: #ffffff;
+  --grad-gold: #ffffff;
+
+  /* Themed side glow defaults (can be overridden per page) */
+  --side-neutral-left: radial-gradient(900px 600px at 0% 50%, rgba(99, 102, 241, 0.20) 0%, rgba(99, 102, 241, 0) 60%);
+  --side-neutral-right: radial-gradient(900px 600px at 100% 50%, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 60%);
+  --side-blue-left: radial-gradient(900px 600px at 0% 50%, rgba(37, 99, 235, 0.24) 0%, rgba(37, 99, 235, 0) 60%);
+  --side-blue-right: radial-gradient(900px 600px at 100% 50%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 60%);
+  --side-red-left: radial-gradient(900px 600px at 0% 50%, rgba(220, 38, 38, 0.24) 0%, rgba(220, 38, 38, 0) 60%);
+  --side-red-right: radial-gradient(900px 600px at 100% 50%, rgba(239, 68, 68, 0.18) 0%, rgba(239, 68, 68, 0) 60%);
+  --side-green-left: radial-gradient(900px 600px at 0% 50%, rgba(5, 150, 105, 0.24) 0%, rgba(5, 150, 105, 0) 60%);
+  --side-green-right: radial-gradient(900px 600px at 100% 50%, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 60%);
+  --side-gold-left: radial-gradient(900px 600px at 0% 50%, rgba(202, 138, 4, 0.24) 0%, rgba(202, 138, 4, 0) 60%);
+  --side-gold-right: radial-gradient(900px 600px at 100% 50%, rgba(234, 179, 8, 0.18) 0%, rgba(234, 179, 8, 0) 60%);
+
+  /* Hero carousel variants (left -> right) */
+  --grad-hero-1: linear-gradient(90deg, #f4f6fb 0%, #ffffff 70%);
+  --grad-hero-2: linear-gradient(90deg, #f6f2ff 0%, #ffffff 70%);
+  --grad-hero-3: linear-gradient(90deg, #eaf7ff 0%, #ffffff 70%);
+
   /* Spacing */
   --spacing-sm: 8px;
   --spacing-md: 16px;

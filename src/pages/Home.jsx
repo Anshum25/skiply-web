@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Common/Button';
 import "../css/Common/globals.css";
@@ -17,6 +17,54 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
   const [selectedBusiness, setSelectedBusiness] = useState(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  // Hero carousel slides (placeholder content/images for now)
+  const slides = useMemo(() => ([
+    {
+      id: 3,
+      date: 'Fri, 12 Dec, 7:00 PM',
+      title: 'Skip The Wait | Book Your Turn Nearby',
+      subtitle: 'Reserve your place in line at restaurants, hospitals, salons, banks and more. Arrive exactly when it\'s your turn.',
+      cta: 'Explore now',
+      coming: 'Available in select locations',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
+    },
+    {
+      id: 2,
+      date: 'Open Today',
+      title: 'Hospitals & Clinics | Real‑time Queues',
+      subtitle: 'Check wait times, book your spot, and spend less time in waiting rooms.',
+      cta: 'Find healthcare',
+      coming: 'New partners added weekly',
+      image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1200&auto=format&fit=crop',
+    },
+    {
+      id: 3,
+      date: 'Trending',
+      title: 'Dining & Salons | Book Before You Go',
+      subtitle: 'Beat the rush at popular places. Simple, fast, and reliable.',
+      cta: 'Browse places',
+      coming: 'Experience smoother outings',
+      image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop',
+    },
+  ]), []);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((s) => (s + 1) % slides.length);
+  }, [slides.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((s) => (s - 1 + slides.length) % slides.length);
+  }, [slides.length]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(id);
+  }, [nextSlide]);
 
   // Handle card click to navigate to business details
   const handleCardClick = (business) => {
@@ -371,16 +419,51 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
 
   return (
     <div className="home-page">
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            <span className="highlight"> Skip the Wait, Book Your Spot</span>
-          </h1>
-          <p className="hero-subtitle">
-            Reserve your place in line at restaurants, hospitals, salons, and more. 
-            Track your position in real-time and arrive exactly when it's your turn.
-          </p>
+      {/* Hero Carousel */}
+      <section className={`hero-carousel variant-${currentSlide}`}>
+        <div className="carousel-inner">
+          {slides.map((slide, idx) => (
+            <div
+              key={slide.id}
+              className={`carousel-slide ${idx === currentSlide ? 'active' : ''}`}
+              aria-hidden={idx !== currentSlide}
+            >
+              <div className="slide-left">
+                <p className="slide-date">{slide.date}</p>
+                <h1 className="slide-title">{slide.title}</h1>
+                <p className="slide-subtitle">{slide.subtitle}</p>
+                <div className="slide-cta-row">
+                  <span className="slide-coming">{slide.coming}</span>
+                  <button className="slide-cta" onClick={() => navigate('/')}>
+                    {slide.cta}
+                  </button>
+                </div>
+              </div>
+              <div className="slide-right">
+                <div className="poster">
+                  <img src={slide.image} alt="highlight" />
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <button className="nav-arrow left" onClick={prevSlide} aria-label="Previous">
+            ‹
+          </button>
+          <button className="nav-arrow right" onClick={nextSlide} aria-label="Next">
+            ›
+          </button>
+
+          <div className="dots">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                className={`dot ${i === currentSlide ? 'active' : ''}`}
+                onClick={() => setCurrentSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 

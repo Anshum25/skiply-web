@@ -71,8 +71,7 @@ const Navbar = ({ onSearch, searchQuery, setSearchQuery, location, setLocation }
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          <span className="logo-icon">⚡</span>
-          Skiply
+          <span className="brand-wordmark">SKIPLY</span>
         </Link>
         
         <button className="location-selector" onClick={openLocationModal}>
@@ -107,7 +106,7 @@ const Navbar = ({ onSearch, searchQuery, setSearchQuery, location, setLocation }
               to="/" 
               className={currentLocation.pathname === '/' ? 'active' : ''}
             >
-              Home
+              For you
             </Link>
           </li>
           <li>

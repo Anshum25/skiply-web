@@ -145,8 +145,17 @@ const BusinessDetails = () => {
     }
   };
 
+  const themeClass = (() => {
+    const cat = (business.category || '').toLowerCase();
+    if (cat.includes('hospital') || cat.includes('clinic')) return 'theme-hospital';
+    if (cat.includes('restaurant') || cat.includes('hotel') || cat.includes('dining')) return 'theme-restaurant';
+    if (cat.includes('salon') || cat.includes('spa')) return 'theme-salon';
+    if (cat.includes('bank')) return 'theme-bank';
+    return '';
+  })();
+
   return (
-    <div className="biz-details-page">
+    <div className={`biz-details-page ${themeClass}`}>
       {/* Back Header */}
       <div className="biz-back-header">
         <Button variant="secondary" onClick={() => navigate(-1)}>

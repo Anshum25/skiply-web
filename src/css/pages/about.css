@@ -3,7 +3,12 @@
 /* About Page Styles */
 .about-page {
   min-height: 100vh;
-  background: var(--color-bg);
+  background:
+    var(--grad-gold),
+    var(--side-gold-left),
+    var(--side-gold-right);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
   padding: 40px 0;
 }
 

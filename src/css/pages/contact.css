@@ -3,7 +3,12 @@
 /* Contact Page Styles */
 .contact-page {
   min-height: 100vh;
-  background: var(--color-bg);
+  background:
+    var(--grad-blue),
+    var(--side-blue-left),
+    var(--side-blue-right);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
   padding: 40px 0;
 }
 
