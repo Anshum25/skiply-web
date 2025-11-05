@@ -156,12 +156,10 @@ const BusinessDetails = () => {
 
   return (
     <div className={`biz-details-page ${themeClass}`}>
-      {/* Back Header */}
-      <div className="biz-back-header">
-        <Button variant="secondary" onClick={() => navigate(-1)}>
-          ← Back to Results
-        </Button>
-      </div>
+      {/* Back Button (no header wrapper) */}
+      <Button variant="secondary" className="biz-back-button" onClick={() => navigate(-1)}>
+        ← Back to Results
+      </Button>
 
       {/* Two Column Layout */}
       <div className="biz-two-column-layout">

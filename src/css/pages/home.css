@@ -1,10 +1,23 @@
 @import url('../variables.css');
 
-/* Home Page Styles */
 .home-page {
+  position: relative;
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Fixed background effect */
+  background-color: #f9fbff; /* base fallback */
+  background-image:
+    radial-gradient(900px 600px at 0% 40%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0.10) 30%, rgba(59, 130, 246, 0.00) 65%),
+    radial-gradient(900px 600px at 100% 35%, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.08) 30%, rgba(59, 130, 246, 0.00) 65%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
+
 
 .container {
   max-width: 100%;
@@ -81,8 +94,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 44px 20px 56px;
-  position: relative;
-  z-index: 1;
+  position: static; /* allow nav arrows to position against .hero-carousel */
 }
 
 .carousel-slide {
@@ -176,10 +188,10 @@
   display: grid;
   place-items: center;
   font-size: 22px;
+  z-index: 3;
 }
-
-.nav-arrow.left { left: 8px; }
-.nav-arrow.right { right: 8px; }
+.nav-arrow.left { left: 20px; }
+.nav-arrow.right { right:20px; }
 
 /* Dots */
 .dots {
@@ -371,6 +383,7 @@
     grid-template-columns: repeat(4, 1fr);
     padding: 0 0px;
     gap: 40px;
+    margin: 30px;
   }
 }
 
