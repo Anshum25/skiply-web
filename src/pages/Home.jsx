@@ -85,6 +85,7 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["General", "Cardiology", "Emergency"],
       priceRange: "₹500 - ₹2000",
       image: "🏥",
+      imageUrl: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop",
       isOpen: true
     },
     {
@@ -99,6 +100,7 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["Dining", "Takeaway", "Loans", "Customer Service", "Loans", "Customer Service",, "Loans", "Customer Service", "Loans", "Customer Service",],
       priceRange: "₹300 - ₹800",
       image: "🍽️",
+      imageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
       isOpen: true
     },
     {
@@ -113,6 +115,7 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["Hair Cut", "Hair Color", "Styling"],
       priceRange: "₹200 - ₹1500",
       image: "💇‍♀️",
+      imageUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=300&fit=crop",
       isOpen: true
     },
     {
@@ -126,11 +129,12 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       queueLength: 15,
       departments: ["Teller", "Loans", "Customer Service", "Lasoans", "Csaustomer Service", "Loans", "Customer Service"],
       image: "🏦",
+      imageUrl: "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=300&fit=crop",
       isOpen: false
     }
     ,
     {
-      id: 4,
+      id: 5,
       name: "M",
       category: "bank",
       rating: 4.0,
@@ -141,6 +145,7 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["Teller", "Loans", "Customer Service"],
       priceRange: "Free - ₹100",
       image: "🏦",
+      imageUrl: "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=300&fit=crop",
       isOpen: true
     },
     {
@@ -323,10 +328,11 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["Teller", "Loans", "Customer Service"],
       priceRange: "Free - ₹100",
       image: "🏦",
+      imageUrl: "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=300&fit=crop",
       isOpen: true
     },
     {
-      id: 4,
+      id: 8,
       name: "Metro Bank Branch",
       category: "bank",
       rating: 4.0,
@@ -337,6 +343,7 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
       departments: ["Teller", "Loans", "Customer Service"],
       priceRange: "Free - ₹100",
       image: "🏦",
+      imageUrl: "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=300&fit=crop",
       isOpen: true
     }
   ];
@@ -536,14 +543,22 @@ const Home = ({ searchQuery, setSearchQuery, location, setLocation, setOnSearch 
                   onClick={() => handleCardClick(business)}
                 >
                   <div className="business-header">
-                    <div className="business-icon">{business.image}</div>
+                    {business.imageUrl && (
+                      <div className="business-image-container">
+                        <img src={business.imageUrl} alt={business.name} className="business-image" />
+                        
+                      </div>
+                    )}
+                    {!business.imageUrl && (
+                      <div className="business-icon">{business.image}</div>
+                    )}
                     <div className="business-detail">
                       <div className="business-info">
                         <h3 className="business-name">{business.name}</h3>
                         <p className="business-addresss">{business.address}</p>
                         <div className="business-meta">
-                          <span className="rating">⭐ {business.rating}</span>
-                          <span className="distance">📍 {business.distance} km</span>
+                          <span className="rating">★ {business.rating}</span>
+                          <span className="distance">{business.distance} km</span>
                           <span className={`status ${business.isOpen ? 'open' : 'closed'}`}>
                             {business.isOpen ? 'Open' : 'Closed'}
                           </span>

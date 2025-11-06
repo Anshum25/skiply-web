@@ -9,10 +9,7 @@
 /* Themed gradients by category */
 .biz-details-page.theme-hospital {
   background-color: #ffffff; /* no center tint */
-  background-image:
-    radial-gradient(900px 400px at 2% 45%, rgba(244, 63, 94, 0.20) 0%, rgba(244, 63, 94, 0.10) 30%, rgba(244, 63, 94, 0.00) 65%),
-    radial-gradient(900px 400px at 98% 45%, rgba(251, 113, 133, 0.18) 0%, rgba(251, 113, 133, 0.08) 30%, rgba(251, 113, 133, 0.00) 65%);
-  background-repeat: no-repeat, no-repeat;
+ background-repeat: no-repeat,no-repeat;
   background-attachment: fixed, fixed;
   background-position: left center, right center;
 }
@@ -39,9 +36,7 @@
   height: 400px;
   position: relative;
   overflow: hidden;
-  background: var(--grad-neutral);
   border-radius: var(--radius-md);
-  padding: 12px;
 }
 
 .biz-carousel {
@@ -51,7 +46,6 @@
 }
 
 /* Themed gradient for carousel area */
-.theme-hospital .biz-carousel-container { background: var(--grad-blue); }
 .theme-restaurant .biz-carousel-container,
 .theme-hotel .biz-carousel-container { background: var(--grad-red); }
 .theme-salon .biz-carousel-container { background: var(--grad-gold); }
@@ -104,8 +98,8 @@
 }
 
 .biz-carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.5);
@@ -145,14 +139,13 @@
   top: 20px;
   background: var(--color-white);
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--color-border);
   overflow: hidden;
 }
 
 /* Left Column Content Sections */
 .biz-content-header {
-  background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   padding: 20px 0px;
   border-radius: var(--radius-md);
@@ -165,7 +158,6 @@
 }
 
 .biz-content-section {
-  background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   padding: 20px 0px;
   border-radius: var(--radius-md);
@@ -248,7 +240,8 @@
 
 /* Right Column Booking Styles */
 .biz-booking-header {
-  padding: 20px;
+  padding: 24px;
+  background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -264,7 +257,7 @@
 }
 
 .biz-price-amount {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--color-primary);
 }
@@ -287,14 +280,26 @@
 
 /* Live Status */
 .biz-live-status {
-  padding: 20px;
+  padding: 24px;
   border-bottom: 1px solid var(--color-border);
-  background: linear-gradient(135deg, #fee2e2, #fef3c7);
+  background: #fafbfc;
+  position: relative;
+  overflow: hidden;
+}
+
+.biz-live-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--color-primary);
 }
 
 .biz-live-status h3 {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: 16px;
 }
@@ -309,6 +314,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 8px 0;
 }
 
 .biz-stat-label {
@@ -317,22 +323,24 @@
 }
 
 .biz-stat-value {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
-/* Booking Options */
-.biz-booking-options {
+/* Booking Action */
+.biz-booking-action {
   padding: 20px;
+  border-top: 1px solid var(--color-border);
 }
 
 .biz-booking-tabs {
   display: flex;
   background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .biz-tab {
@@ -341,9 +349,9 @@
   border: none;
   background: transparent;
   color: var(--color-muted);
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
@@ -352,6 +360,7 @@
 .biz-tab.active {
   background: var(--color-primary);
   color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Form Elements */
@@ -380,13 +389,15 @@
   font-size: 14px;
   color: var(--color-text);
   background: var(--color-white);
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .biz-select:focus,
 .biz-date-input:focus {
   outline: none;
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
 /* Time Grid */
@@ -402,8 +413,8 @@
   background: var(--color-white);
   color: var(--color-text);
   border-radius: var(--radius-md);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
@@ -426,36 +437,46 @@
 }
 
 .biz-live-benefit {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  font-size: 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
   color: var(--color-text);
+  padding-left: 0;
 }
 
 .biz-benefit-icon {
-  font-size: 16px;
+  display: none;
 }
 
 /* Book Now Button */
 .biz-book-now-btn {
   width: 100%;
   padding: 16px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  margin-top: 20px;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.biz-book-now-btn:hover:not(:disabled) {
+  background: var(--color-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Hours Section */
 .biz-hours-section {
-  padding: 20px;
+  padding: 24px;
+  background: #fafbfc;
   border-top: 1px solid var(--color-border);
 }
 
 .biz-hours-section h3 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: 16px;
 }
@@ -470,7 +491,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
+  padding: 8px 0;
 }
 
 .biz-hours-compact .biz-hours-item span:first-child {
@@ -512,6 +534,35 @@
   background: var(--color-bg);
   border-radius: var(--radius-md);
   flex-shrink: 0;
+}
+
+.biz-icon-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.biz-icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.biz-icon-overlay-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 4px 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  line-height: 1;
 }
 
 .biz-header-info {
@@ -846,12 +897,12 @@
 
 /* Booking Popup Styles */
 .biz-booking-popup {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
 }
 
 .biz-form-group {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .biz-form-group label {
@@ -866,11 +917,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 20px;
 }
 
 .biz-booking-type-option {
-  padding: 20px;
+  padding: 18px 20px;
   border: 2px solid var(--color-border);
   background: var(--color-white);
   border-radius: var(--radius-md);
@@ -878,8 +928,9 @@
   transition: all 0.2s ease;
   text-align: left;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: flex-start;
+  min-height: 100px;
 }
 
 .biz-booking-type-option:hover {
@@ -894,8 +945,7 @@
 }
 
 .biz-booking-type-icon {
-  font-size: 24px;
-  flex-shrink: 0;
+  display: none;
 }
 
 .biz-booking-type-info {
@@ -903,15 +953,16 @@
 }
 
 .biz-booking-type-info h4 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .biz-booking-type-info p {
-  font-size: 14px;
-  margin-bottom: 8px;
-  opacity: 0.8;
+  font-size: 13px;
+  margin-bottom: 6px;
+  opacity: 0.75;
+  line-height: 1.4;
 }
 
 .biz-queue-info {
@@ -929,16 +980,16 @@
 .biz-department-selector {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .biz-department-option {
-  padding: 12px 20px;
+  padding: 10px 18px;
   border: 2px solid var(--color-border);
   background: var(--color-white);
   color: var(--color-text);
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -957,25 +1008,24 @@
 
 .biz-date-selector {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
 }
 
 .biz-date-option {
-  padding: 16px 12px;
+  padding: 14px 10px;
   border: 2px solid var(--color-border);
   background: var(--color-white);
   color: var(--color-text);
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .biz-date-option:hover {
@@ -990,32 +1040,38 @@
 }
 
 .biz-date-option.today {
-  border-color: #10b981;
+  border-color: #06b6d4;
+}
+
+.biz-date-option.today.selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
 }
 
 .biz-date-display {
   font-weight: 600;
+  font-size: 14px;
 }
 
 .biz-today-label {
-  font-size: 12px;
-  opacity: 0.7;
-  font-weight: 500;
+  font-size: 11px;
+  opacity: 0.65;
+  font-weight: 400;
 }
 
 .biz-time-selector {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 10px;
 }
 
 .biz-time-option {
-  padding: 12px 16px;
+  padding: 11px 14px;
   border: 2px solid var(--color-border);
   background: var(--color-white);
   color: var(--color-text);
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -1034,14 +1090,15 @@
 }
 
 .biz-live-booking-info {
-  margin: 30px 0;
+  margin: 32px 0 0 0;
 }
 
 .biz-live-info-card {
-  background: linear-gradient(135deg, var(--color-primary), #667eea);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 28px;
   color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .biz-live-info-card h4 {
@@ -1084,11 +1141,11 @@
 }
 
 .biz-booking-summary {
-  margin: 30px 0;
+  margin: 32px 0 0 0;
 }
 
 .biz-summary-card {
-  background: var(--color-bg);
+  background: #fafbfc;
   border-radius: var(--radius-md);
   padding: 24px;
   border: 2px solid var(--color-border);
@@ -1098,7 +1155,9 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .biz-summary-item {
@@ -1120,14 +1179,26 @@
 }
 
 .biz-booking-actions {
-  text-align: center;
-  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 0;
+}
+
+.biz-cancel-button {
+  flex: 1;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
 .biz-book-button {
-  min-width: 200px;
-  font-size: 16px;
-  padding: 16px 32px;
+  flex: 1;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
 /* Error Message */
@@ -1209,6 +1280,11 @@
   .biz-tab {
     padding: 16px;
     font-size: 14px;
+  }
+  
+  .biz-booking-actions {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 

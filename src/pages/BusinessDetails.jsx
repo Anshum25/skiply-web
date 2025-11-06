@@ -82,18 +82,18 @@ const BusinessDetails = () => {
   const getAvailableDates = () => {
     const dates = [];
     const today = new Date();
-    
+
     for (let i = 0; i < 7; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      
+
       const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD format
       const displayDate = date.toLocaleDateString('en-US', {
         weekday: 'short',
         month: 'short',
         day: 'numeric'
       });
-      
+
       dates.push({
         value: dateString,
         display: displayDate,
@@ -114,7 +114,7 @@ const BusinessDetails = () => {
       alert('Please select a department first');
       return;
     }
-    
+
     if (bookingType === 'advance' && (!selectedDate || !selectedTimeSlot)) {
       if (!selectedDate) {
         alert('Please select a date for advance booking');
@@ -125,13 +125,13 @@ const BusinessDetails = () => {
         return;
       }
     }
-    
+
     if (bookingType === 'live') {
       const queuePosition = business.queueLength + 1;
       const estimatedTime = new Date();
       estimatedTime.setMinutes(estimatedTime.getMinutes() + parseInt(business.waitTime.split('-')[0]));
-      
-      alert(`Live Booking Confirmed! 🎉\n\nBusiness: ${business.name}\nDepartment: ${selectedDepartment}\nQueue Position: #${queuePosition}\nEstimated Service Time: ${estimatedTime.toLocaleTimeString()}\n\nYou will receive notifications about your queue status.`);
+
+      alert(`Live Booking Confirmed!\n\nBusiness: ${business.name}\nDepartment: ${selectedDepartment}\nQueue Position: #${queuePosition}\nEstimated Service Time: ${estimatedTime.toLocaleTimeString()}\n\nYou will receive notifications about your queue status.`);
     } else {
       const selectedDateObj = new Date(selectedDate);
       const formattedDate = selectedDateObj.toLocaleDateString('en-US', {
@@ -140,8 +140,8 @@ const BusinessDetails = () => {
         month: 'long',
         day: 'numeric'
       });
-      
-      alert(`Advance Booking Confirmed! 📅\n\nBusiness: ${business.name}\nDepartment: ${selectedDepartment}\nDate: ${formattedDate}\nTime: ${selectedTimeSlot}\n\nPlease arrive 10 minutes before your scheduled time.`);
+
+      alert(`Advance Booking Confirmed!\n\nBusiness: ${business.name}\nDepartment: ${selectedDepartment}\nDate: ${formattedDate}\nTime: ${selectedTimeSlot}\n\nPlease arrive 10 minutes before your scheduled time.`);
     }
   };
 
@@ -168,8 +168,8 @@ const BusinessDetails = () => {
           {/* Image Carousel */}
           <div className="biz-carousel-container">
             <div className="biz-carousel">
-              <img 
-                src={businessImages[currentImageIndex]} 
+              <img
+                src={businessImages[currentImageIndex]}
                 alt={`${business.name} - Image ${currentImageIndex + 1}`}
                 className="biz-carousel-image"
               />
@@ -194,18 +194,24 @@ const BusinessDetails = () => {
           {/* Business Header */}
           <div className="biz-content-header">
             <div className="biz-header-main">
-              <div className="biz-icon">{business.image}</div>
+              {business.imageUrl ? (
+                <div className="biz-icon-container">
+                  <img src={business.imageUrl} alt={business.name} className="biz-icon-image" />
+                </div>
+              ) : (
+                <div className="biz-icon">{business.image}</div>
+              )}
               <div className="biz-header-info">
                 <h1 className="biz-name">{business.name}</h1>
                 <p className="biz-category">{business.category}</p>
                 <p className="biz-address">{business.address}</p>
                 <div className="biz-meta">
-                  <span className="biz-distance">📍 {business.distance} km</span>
+                  <span className="biz-distance">{business.distance} km</span>
                   <span className={`biz-status ${business.isOpen ? 'open' : 'closed'}`}>
                     {business.isOpen ? 'Open' : 'Closed'}
                   </span>
                   <button className="biz-share-btn-small" onClick={handleShare}>
-                    📤 Share
+                    Share
                   </button>
                 </div>
               </div>
@@ -238,35 +244,35 @@ const BusinessDetails = () => {
                 <div className="biz-rating-score">
                   <span className="biz-rating-number">{business.rating}</span>
                   <div className="biz-rating-stars">
-                    {'⭐'.repeat(Math.floor(business.rating))}
-                    {business.rating % 1 !== 0 && '⭐'}
+                    {'★'.repeat(Math.floor(business.rating))}
+                    {business.rating % 1 !== 0 && '★'}
                   </div>
                   <span className="biz-rating-count">(248 reviews)</span>
                 </div>
                 <div className="biz-rating-breakdown">
                   <div className="biz-rating-bar">
-                    <span>5 ⭐</span>
-                    <div className="biz-bar"><div className="biz-bar-fill" style={{width: '70%'}}></div></div>
+                    <span>5 ★</span>
+                    <div className="biz-bar"><div className="biz-bar-fill" style={{ width: '70%' }}></div></div>
                     <span>174</span>
                   </div>
                   <div className="biz-rating-bar">
-                    <span>4 ⭐</span>
-                    <div className="biz-bar"><div className="biz-bar-fill" style={{width: '20%'}}></div></div>
+                    <span>4 ★</span>
+                    <div className="biz-bar"><div className="biz-bar-fill" style={{ width: '20%' }}></div></div>
                     <span>50</span>
                   </div>
                   <div className="biz-rating-bar">
-                    <span>3 ⭐</span>
-                    <div className="biz-bar"><div className="biz-bar-fill" style={{width: '7%'}}></div></div>
+                    <span>3 ★</span>
+                    <div className="biz-bar"><div className="biz-bar-fill" style={{ width: '7%' }}></div></div>
                     <span>17</span>
                   </div>
                   <div className="biz-rating-bar">
-                    <span>2 ⭐</span>
-                    <div className="biz-bar"><div className="biz-bar-fill" style={{width: '2%'}}></div></div>
+                    <span>2 ★</span>
+                    <div className="biz-bar"><div className="biz-bar-fill" style={{ width: '2%' }}></div></div>
                     <span>5</span>
                   </div>
                   <div className="biz-rating-bar">
-                    <span>1 ⭐</span>
-                    <div className="biz-bar"><div className="biz-bar-fill" style={{width: '1%'}}></div></div>
+                    <span>1 ★</span>
+                    <div className="biz-bar"><div className="biz-bar-fill" style={{ width: '1%' }}></div></div>
                     <span>2</span>
                   </div>
                 </div>
@@ -280,7 +286,7 @@ const BusinessDetails = () => {
                       className={`biz-star-btn ${userRating >= star ? 'active' : ''}`}
                       onClick={() => handleRating(star)}
                     >
-                      ⭐
+                      ★
                     </button>
                   ))}
                 </div>
@@ -312,14 +318,14 @@ const BusinessDetails = () => {
                 <span className="biz-price-amount">{business.priceRange || '₹100 - ₹500'}</span>
               </div>
               <div className="biz-booking-rating">
-                <span className="biz-rating-score-small">⭐ {business.rating}</span>
+                <span className="biz-rating-score-small">★ {business.rating}</span>
                 <span className="biz-rating-count-small">(248 reviews)</span>
               </div>
             </div>
 
             {/* Live Queue Status */}
             <div className="biz-live-status">
-              <h3>🔴 Live Queue Status</h3>
+              <h3>Live Queue Status</h3>
               <div className="biz-queue-stats">
                 <div className="biz-stat-item">
                   <span className="biz-stat-label">Wait Time</span>
@@ -336,115 +342,15 @@ const BusinessDetails = () => {
               </div>
             </div>
 
-            {/* Booking Options */}
-            <div className="biz-booking-options">
-              <div className="biz-booking-tabs">
-                <button 
-                  className={`biz-tab ${bookingType === 'live' ? 'active' : ''}`}
-                  onClick={() => setBookingType('live')}
-                >
-                  🔴 Join Live Queue
-                </button>
-                <button 
-                  className={`biz-tab ${bookingType === 'advance' ? 'active' : ''}`}
-                  onClick={() => setBookingType('advance')}
-                >
-                  📅 Book in Advance
-                </button>
-              </div>
-
-              {bookingType === 'live' ? (
-                <div className="biz-live-booking">
-                  <div className="biz-department-select">
-                    <label>Select Department</label>
-                    <select 
-                      value={selectedDepartment} 
-                      onChange={(e) => setSelectedDepartment(e.target.value)}
-                      className="biz-select"
-                    >
-                      <option value="">Choose department...</option>
-                      {business.departments.map((dept, index) => (
-                        <option key={index} value={dept}>{dept}</option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div className="biz-live-info">
-                    <div className="biz-live-benefit">
-                      <span className="biz-benefit-icon">⚡</span>
-                      <span>Get real-time queue updates</span>
-                    </div>
-                    <div className="biz-live-benefit">
-                      <span className="biz-benefit-icon">📱</span>
-                      <span>Track your position live</span>
-                    </div>
-                    <div className="biz-live-benefit">
-                      <span className="biz-benefit-icon">🔔</span>
-                      <span>Get notified when it's your turn</span>
-                    </div>
-                  </div>
-
-                  <Button 
-                    variant="primary" 
-                    className="biz-book-now-btn"
-                    onClick={() => setShowBookingPopup(true)}
-                    disabled={!selectedDepartment}
-                  >
-                    🚀 Join Queue Now
-                  </Button>
-                </div>
-              ) : (
-                <div className="biz-advance-booking">
-                  <div className="biz-date-select">
-                    <label>Select Date</label>
-                    <input 
-                      type="date" 
-                      value={selectedDate}
-                      onChange={(e) => setSelectedDate(e.target.value)}
-                      className="biz-date-input"
-                      min={new Date().toISOString().split('T')[0]}
-                    />
-                  </div>
-
-                  <div className="biz-time-slots">
-                    <label>Available Time Slots</label>
-                    <div className="biz-time-grid">
-                      {['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM', '4:00 PM'].map((time) => (
-                        <button
-                          key={time}
-                          className={`biz-time-slot ${selectedTimeSlot === time ? 'selected' : ''}`}
-                          onClick={() => setSelectedTimeSlot(time)}
-                        >
-                          {time}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="biz-department-select">
-                    <label>Select Department</label>
-                    <select 
-                      value={selectedDepartment} 
-                      onChange={(e) => setSelectedDepartment(e.target.value)}
-                      className="biz-select"
-                    >
-                      <option value="">Choose department...</option>
-                      {business.departments.map((dept, index) => (
-                        <option key={index} value={dept}>{dept}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <Button 
-                    variant="primary" 
-                    className="biz-book-now-btn"
-                    onClick={() => setShowBookingPopup(true)}
-                    disabled={!selectedDate || !selectedTimeSlot || !selectedDepartment}
-                  >
-                    📅 Book Appointment
-                  </Button>
-                </div>
-              )}
+            {/* Book Now Button */}
+            <div className="biz-booking-action">
+              <Button
+                variant="primary"
+                className="biz-book-now-btn"
+                onClick={() => setShowBookingPopup(true)}
+              >
+                Book Now
+              </Button>
             </div>
 
             {/* Operating Hours */}
@@ -471,7 +377,7 @@ const BusinessDetails = () => {
 
       {/* Booking Popup */}
       {showBookingPopup && (
-        <Popup onClose={() => setShowBookingPopup(false)} title="Book Your Appointment">
+        <Popup isOpen={true} onClose={() => setShowBookingPopup(false)} title="Book Your Appointment" size="large" className="biz-booking-modal">
           <div className="biz-booking-popup">
             {/* Booking Type Selector */}
             <div className="biz-form-group">
@@ -485,7 +391,7 @@ const BusinessDetails = () => {
                     setSelectedDate('');
                   }}
                 >
-                  <div className="biz-booking-type-icon">🚀</div>
+                  <div className="biz-booking-type-icon"></div>
                   <div className="biz-booking-type-info">
                     <h4>Live Booking</h4>
                     <p>Join current queue • Get served today</p>
@@ -496,7 +402,7 @@ const BusinessDetails = () => {
                   className={`biz-booking-type-option ${bookingType === 'advance' ? 'selected' : ''}`}
                   onClick={() => setBookingType('advance')}
                 >
-                  <div className="biz-booking-type-icon">📅</div>
+                  <div className="biz-booking-type-icon"></div>
                   <div className="biz-booking-type-info">
                     <h4>Advance Booking</h4>
                     <p>Schedule for later • Skip the queue</p>
@@ -559,88 +465,23 @@ const BusinessDetails = () => {
               </div>
             )}
 
-            {/* Live Booking Info */}
-            {bookingType === 'live' && selectedDepartment && (
-              <div className="biz-live-booking-info">
-                <div className="biz-live-info-card">
-                  <h4>🚀 Live Booking Details</h4>
-                  <div className="biz-live-info-grid">
-                    <div className="biz-live-info-item">
-                      <span className="biz-label">Current Queue Position</span>
-                      <span className="biz-value">#{business.queueLength + 1}</span>
-                    </div>
-                    <div className="biz-live-info-item">
-                      <span className="biz-label">Estimated Wait Time</span>
-                      <span className="biz-value">{business.waitTime}</span>
-                    </div>
-                    <div className="biz-live-info-item">
-                      <span className="biz-label">Estimated Service Time</span>
-                      <span className="biz-value">
-                        {new Date(Date.now() + parseInt(business.waitTime.split('-')[0]) * 60000).toLocaleTimeString()}
-                      </span>
-                    </div>
-                    <div className="biz-live-info-item">
-                      <span className="biz-label">Queue Status</span>
-                      <span className="biz-value biz-status-active">Active</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Booking Summary */}
-            <div className="biz-booking-summary">
-              {selectedDepartment && (bookingType === 'live' || (selectedDate && selectedTimeSlot)) && (
-                <div className="biz-summary-card">
-                  <h4>Booking Summary</h4>
-                  <div className="biz-summary-item">
-                    <span>Business:</span>
-                    <span>{business.name}</span>
-                  </div>
-                  <div className="biz-summary-item">
-                    <span>Department:</span>
-                    <span>{selectedDepartment}</span>
-                  </div>
-                  <div className="biz-summary-item">
-                    <span>Booking Type:</span>
-                    <span>{bookingType === 'live' ? 'Live Booking' : 'Advance Booking'}</span>
-                  </div>
-                  {bookingType === 'live' ? (
-                    <>
-                      <div className="biz-summary-item">
-                        <span>Queue Position:</span>
-                        <span>#{business.queueLength + 1}</span>
-                      </div>
-                      <div className="biz-summary-item">
-                        <span>Estimated Wait:</span>
-                        <span>{business.waitTime}</span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="biz-summary-item">
-                        <span>Scheduled Date:</span>
-                        <span>{new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
-                      </div>
-                      <div className="biz-summary-item">
-                        <span>Scheduled Time:</span>
-                        <span>{selectedTimeSlot}</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
-
             <div className="biz-booking-actions">
+              <Button
+                variant="secondary"
+                size="large"
+                onClick={() => setShowBookingPopup(false)}
+                className="biz-cancel-button"
+              >
+                Cancel
+              </Button>
               {business.isOpen ? (
-                <Button 
-                  variant="primary" 
+                <Button
+                  variant="primary"
                   size="large"
                   onClick={handleBookNow}
                   className="biz-book-button"
                 >
-                  {bookingType === 'live' ? '🚀 Join Queue Now' : '📅 Schedule Appointment'}
+                  {bookingType === 'live' ? 'Join Queue Now' : 'Schedule Appointment'}
                 </Button>
               ) : (
                 <Button variant="primary" size="large" disabled className="biz-book-button">
