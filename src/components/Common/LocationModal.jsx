@@ -147,7 +147,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
               <div className="city-list">
                 {filteredCities.map((city, index) => (
                   <div
-                    key={index}
+                    key={`search-${city}-${index}`}
                     className="city-item"
                     onClick={() => handleCitySelect(city)}
                   >
@@ -167,7 +167,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
                   <div className="popular-cities-grid">
                     {popularCities.map((city, index) => (
                       <div
-                        key={index}
+                        key={`popular-${city.name}-${index}`}
                         className="popular-city-card"
                         onClick={() => handleCitySelect(city.name)}
                       >
@@ -208,7 +208,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
                         <div className="cities-in-group">
                           {groupedCities[letter].map((city, index) => (
                             <div
-                              key={index}
+                              key={`${letter}-${city}-${index}`}
                               className="city-item"
                               onClick={() => handleCitySelect(city)}
                             >
