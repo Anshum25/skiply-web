@@ -49,7 +49,7 @@ const FeedbackRatings = () => {
     }
   ]);
 
-  const [departmentStats, setDepartmentStats] = useState([
+  const [departmentStats] = useState([
     { name: 'Dentistry', avgRating: 4.8, totalReviews: 145, positive: 92 },
     { name: 'Haircut', avgRating: 4.5, totalReviews: 98, positive: 82 },
     { name: 'Banking', avgRating: 4.2, totalReviews: 67, positive: 75 }

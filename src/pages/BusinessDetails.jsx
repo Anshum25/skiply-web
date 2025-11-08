@@ -5,6 +5,7 @@ import Popup from '../components/Common/Popup';
 import '../css/pages/business-details.css';
 
 const BusinessDetails = () => {
+  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ const BusinessDetails = () => {
             <div className="biz-carousel">
               <img
                 src={businessImages[currentImageIndex]}
-                alt={`${business.name} - Image ${currentImageIndex + 1}`}
+                alt={`${business.name} - ${currentImageIndex + 1}`}
                 className="biz-carousel-image"
               />
               <button className="biz-carousel-btn biz-carousel-prev" onClick={prevImage}>

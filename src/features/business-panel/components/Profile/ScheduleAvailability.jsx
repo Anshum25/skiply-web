@@ -20,7 +20,7 @@ const ScheduleAvailability = () => {
     { id: 3, name: 'Lunch Break', startTime: '13:00', endTime: '14:00', type: 'break', recurring: true }
   ]);
 
-  const [slots, setSlots] = useState([
+  const [slots] = useState([
     { id: 1, time: '09:00 - 09:30', capacity: 10, booked: 7 },
     { id: 2, time: '09:30 - 10:00', capacity: 10, booked: 10 },
     { id: 3, time: '10:00 - 10:30', capacity: 10, booked: 5 },
