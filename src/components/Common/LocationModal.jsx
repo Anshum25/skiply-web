@@ -60,7 +60,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
 
   const handleUseCurrentLocation = () => {
     setLoadingLocation(true);
-    
+
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
       setLoadingLocation(false);
@@ -72,7 +72,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
         try {
           const { latitude, longitude } = position.coords;
           const response = await locationAPI.getCurrentLocation(latitude, longitude);
-          
+
           if (response.success) {
             const city = response.data.city;
             onLocationSelect(city);
@@ -131,7 +131,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
           </div>
 
           {/* Use Current Location */}
-          <button 
+          <button
             className="current-location-button"
             onClick={handleUseCurrentLocation}
             disabled={loadingLocation}
@@ -182,7 +182,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect, currentLocation }) =
               {/* All Cities */}
               <div className="all-cities-section">
                 <h3>All Cities</h3>
-                
+
                 {/* Alphabet Navigation */}
                 <div className="alphabet-nav">
                   {alphabet.map((letter) => (

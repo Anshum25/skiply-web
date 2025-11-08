@@ -1,0 +1,67 @@
+@import '../../../css/variables.css';
+
+/* Stat Card Component */
+.bp-stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bp-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.bp-stat-icon {
+  font-size: 3rem;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.bp-stat-details {
+  flex: 1;
+}
+
+.bp-stat-details h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bp-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 5px 0;
+}
+
+.bp-stat-change {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.bp-stat-change.positive {
+  color: #10b981;
+}
+
+.bp-stat-change.negative {
+  color: #ef4444;
+}
+
+.bp-stat-change.neutral {
+  color: var(--color-muted);
+}

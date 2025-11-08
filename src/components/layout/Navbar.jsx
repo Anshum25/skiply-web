@@ -67,6 +67,12 @@ const Navbar = ({ onSearch, searchQuery, setSearchQuery, location, setLocation }
     }
   };
 
+  const handleBusinessPanelClick = () => {
+    console.log('Business Panel button clicked!');
+    console.log('Navigating to /business-panel');
+    navigate('/business-panel');
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -125,6 +131,7 @@ const Navbar = ({ onSearch, searchQuery, setSearchQuery, location, setLocation }
               Contact
             </Link>
           </li>
+         
           
           {!user ? (
             // Not logged in - show Sign In/Sign Up
@@ -140,6 +147,12 @@ const Navbar = ({ onSearch, searchQuery, setSearchQuery, location, setLocation }
                 onClick={() => openAuthModal('signup')}
               >
                 Sign Up
+              </Button>
+               <Button 
+                variant="secondary"
+                onClick={handleBusinessPanelClick}
+              >
+                Business Panel
               </Button>
             </li>
           ) : (

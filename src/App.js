@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import BusinessDetails from "./pages/BusinessDetails";
+import BusinessPanel from "./features/business-panel/pages/BusinessPanel";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Loader from "./components/Common/Loader";
@@ -19,15 +20,20 @@ function AppContent() {
   const [searchLocation, setSearchLocation] = useState('');
   const [onSearch, setOnSearch] = useState(null);
 
+  // Check if current route is Business Panel (including nested routes)
+  const isBusinessPanel = location.pathname.startsWith('/business-panel');
+
   return (
     <>
-      <Navbar 
-        onSearch={onSearch}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        location={searchLocation}
-        setLocation={setSearchLocation}
-      />
+      {!isBusinessPanel && (
+        <Navbar 
+          onSearch={onSearch}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          location={searchLocation}
+          setLocation={setSearchLocation}
+        />
+      )}
       <Routes>
         <Route 
           path="/" 
@@ -45,11 +51,11 @@ function AppContent() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/business/:id" element={<BusinessDetails />} />
+        <Route path="/business-panel/*" element={<BusinessPanel />} />
         {/* TODO: Add more routes */}
-        {/* <Route path="/admin" element={<BusinessDashboard />} /> */}
         {/* <Route path="/search" element={<BusinessSearch />} /> */}
       </Routes>
-      <Footer />
+      {!isBusinessPanel && <Footer />}
     </>
   );
 }

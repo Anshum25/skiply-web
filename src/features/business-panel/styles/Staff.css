@@ -1,0 +1,208 @@
+@import '../../../css/variables.css';
+
+/* Staff Management Styles */
+.bp-staff {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Staff Grid */
+.bp-staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.bp-staff-card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bp-staff-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.bp-staff-card.inactive {
+  opacity: 0.6;
+}
+
+.bp-staff-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 auto;
+}
+
+.bp-staff-info {
+  text-align: center;
+}
+
+.bp-staff-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.bp-staff-email {
+  margin: 0 0 15px 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.bp-staff-meta {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bp-role-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bp-role-badge.manager {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.bp-role-badge.handler {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.bp-role-badge.viewer {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+}
+
+.bp-dept-tag {
+  padding: 6px 12px;
+  background: rgba(1, 22, 39, 0.1);
+  color: var(--color-secondary);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Staff Stats */
+.bp-staff-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.bp-staff-stat {
+  text-align: center;
+}
+
+.bp-staff-stat .value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 5px;
+}
+
+.bp-staff-stat .label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* Staff Status */
+.bp-staff-status {
+  text-align: center;
+}
+
+.bp-status-indicator {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.bp-status-indicator.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.bp-status-indicator.inactive {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+}
+
+/* Staff Actions */
+.bp-staff-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 2px solid var(--color-border);
+}
+
+.bp-staff-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.bp-staff-btn.edit {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.bp-staff-btn.edit:hover {
+  background: var(--color-primary);
+}
+
+.bp-staff-btn.toggle {
+  background: #3b82f6;
+  color: white;
+}
+
+.bp-staff-btn.toggle:hover {
+  background: #2563eb;
+}
+
+.bp-staff-btn.delete {
+  background: #ef4444;
+  color: white;
+}
+
+.bp-staff-btn.delete:hover {
+  background: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bp-staff-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,261 @@
+@import '../../../css/variables.css';
+
+/* Dashboard Styles */
+.bp-dashboard {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Stats Grid */
+.bp-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Quick Actions */
+.bp-quick-actions {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.bp-quick-actions h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.3rem;
+  color: var(--color-text);
+}
+
+.bp-action-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.bp-action-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.bp-action-btn.primary {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.bp-action-btn.primary:hover {
+  background: var(--color-primary);
+}
+
+.bp-action-btn.success {
+  background: #10b981;
+  color: white;
+}
+
+.bp-action-btn.success:hover {
+  background: #059669;
+}
+
+.bp-action-btn.warning {
+  background: #f59e0b;
+  color: white;
+}
+
+.bp-action-btn.warning:hover {
+  background: #d97706;
+}
+
+.bp-action-btn.info {
+  background: #3b82f6;
+  color: white;
+}
+
+.bp-action-btn.info:hover {
+  background: #2563eb;
+}
+
+.bp-action-btn.secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.bp-action-btn.secondary:hover {
+  background: #4b5563;
+}
+
+/* Dashboard Grid */
+.bp-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.bp-dashboard-card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.bp-dashboard-card h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* Traffic Chart */
+.bp-chart-container {
+  margin-top: 20px;
+}
+
+.bp-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  gap: 8px;
+}
+
+.bp-bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bp-bar {
+  width: 100%;
+  background: var(--color-secondary);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: all 0.3s;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.bp-bar:hover {
+  background: var(--color-primary);
+}
+
+.bp-bar-value {
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 600;
+}
+
+.bp-bar-label {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+/* Activity Feed */
+.bp-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bp-activity-item {
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-left: 3px solid var(--color-border);
+}
+
+.bp-activity-item.success {
+  border-left-color: #10b981;
+}
+
+.bp-activity-item.warning {
+  border-left-color: #f59e0b;
+}
+
+.bp-activity-item.info {
+  border-left-color: #3b82f6;
+}
+
+.bp-activity-time {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.bp-activity-action {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+/* Additional Stats */
+.bp-additional-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.bp-stat-item {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bp-stat-icon-small {
+  font-size: 2rem;
+}
+
+.bp-stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.bp-stat-label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bp-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .bp-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-action-buttons {
+    flex-direction: column;
+  }
+
+  .bp-action-btn {
+    width: 100%;
+  }
+}

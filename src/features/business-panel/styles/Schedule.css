@@ -1,0 +1,362 @@
+@import '../../../css/variables.css';
+
+/* Schedule Styles */
+.bp-schedule {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Booking Toggle */
+.bp-schedule-toggle {
+  margin-bottom: 30px;
+}
+
+.bp-toggle-card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bp-toggle-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+.bp-toggle-info p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* Toggle Switch */
+.bp-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.bp-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bp-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.bp-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .bp-slider {
+  background-color: #10b981;
+}
+
+input:checked + .bp-slider:before {
+  transform: translateX(26px);
+}
+
+.bp-booking-disabled-alert {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  color: var(--color-text);
+}
+
+/* Schedule Section */
+.bp-schedule-section {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.bp-schedule-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.bp-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.bp-section-header h3 {
+  margin: 0;
+}
+
+/* Hours List */
+.bp-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bp-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
+  transition: all 0.2s;
+}
+
+.bp-hours-row.closed {
+  opacity: 0.6;
+  background: #f3f4f6;
+}
+
+.bp-day-name {
+  min-width: 150px;
+}
+
+.bp-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.bp-checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-secondary);
+}
+
+.bp-time-inputs {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bp-time-inputs input[type="time"] {
+  padding: 8px 12px;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.bp-time-inputs input[type="time"]:focus {
+  border-color: var(--color-secondary);
+}
+
+.bp-time-inputs span {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.bp-closed-label {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Holidays List */
+.bp-holidays-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bp-holiday-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-border);
+  transition: all 0.2s;
+}
+
+.bp-holiday-item:hover {
+  background: #f3f4f6;
+  transform: translateX(5px);
+}
+
+.bp-holiday-item.holiday {
+  border-left-color: #3b82f6;
+}
+
+.bp-holiday-item.break {
+  border-left-color: #f59e0b;
+}
+
+.bp-holiday-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.bp-holiday-details {
+  flex: 1;
+}
+
+.bp-holiday-details h4 {
+  margin: 0 0 5px 0;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.bp-holiday-details p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.bp-holiday-delete {
+  padding: 8px 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.bp-holiday-delete:hover {
+  background: #dc2626;
+}
+
+/* Time Slots */
+.bp-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.bp-slot-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.bp-slot-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bp-slot-card.available {
+  border-color: #10b981;
+}
+
+.bp-slot-card.filling {
+  border-color: #f59e0b;
+}
+
+.bp-slot-card.full {
+  border-color: #ef4444;
+  opacity: 0.7;
+}
+
+.bp-slot-time {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.bp-slot-capacity {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.bp-slot-capacity .booked {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.bp-slot-capacity .separator {
+  color: var(--color-muted);
+  margin: 0 5px;
+}
+
+.bp-slot-capacity .total {
+  color: var(--color-muted);
+}
+
+.bp-slot-bar {
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.bp-slot-fill {
+  height: 100%;
+  background: var(--color-secondary);
+  transition: width 0.3s;
+}
+
+.bp-slot-card.available .bp-slot-fill {
+  background: #10b981;
+}
+
+.bp-slot-card.filling .bp-slot-fill {
+  background: #f59e0b;
+}
+
+.bp-slot-card.full .bp-slot-fill {
+  background: #ef4444;
+}
+
+.bp-slot-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bp-hours-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .bp-time-inputs {
+    width: 100%;
+  }
+
+  .bp-slots-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
