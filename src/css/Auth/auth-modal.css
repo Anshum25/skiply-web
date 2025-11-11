@@ -6,7 +6,7 @@
 }
 
 .auth-modal-content {
-  padding: 32px;
+  padding: 30px;
 }
 
 .auth-subtitle {
@@ -20,7 +20,7 @@
 .role-selector {
   display: flex;
   gap: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 4px;
   background: var(--color-bg);
   border-radius: var(--radius-md);
@@ -60,22 +60,43 @@
 /* Business Section */
 .business-section {
   border-top: 1px solid var(--color-border);
-  padding-top: 24px;
-  margin-top: 8px;
+  /* padding-top: 24px;
+  margin-top: 8px; */
 }
 
 .business-section h3 {
-  color: var(--color-text);
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 600;
+    /* margin-bottom: 20px; */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
 }
 
+.business-div{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
 .business-section h3::before {
   content: "🏢";
+}
+
+/* Business owner flow progress bar */
+.bo-progress {
+  margin-bottom: 16px;
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.bo-progress__bar {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 /* Button Styles */
@@ -95,6 +116,19 @@
 .auth-btn:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 8px 25px rgba(1, 22, 39, 0.3);
+}
+
+.auth-btn1{
+    padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
 }
 
 .auth-btn:disabled {
@@ -131,10 +165,11 @@
   background: none;
   border: none;
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
+  font-size: 16px;
 }
 
 .auth-link:hover {
