@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../Common/Popup';
 import InputField from '../Common/InputField';
+import Button from '../Common/Button';
 import '../../css/Auth/auth-modal.css';
 
 const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
   const [mode, setMode] = useState(initialMode); // 'login' or 'signup'
   const [role, setRole] = useState('customer');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [formError, setFormError] = useState('');
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   // Form data
@@ -55,78 +57,72 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
         [field]: value
       }));
     }
-    setError(''); // Clear error when user types
+    setFormError('');
+    setErrors(prev => ({ ...prev, [field]: '' }));
   };
 
   // Validation function for step 0
   const validateStep0 = () => {
+    const nextErrors = {};
     if (!formData.name.trim()) {
-      setError('Full Name is required');
-      return false;
+      nextErrors.name = 'Full Name is required';
     }
     if (!formData.email.trim()) {
-      setError('Email Address is required');
-      return false;
-    }
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError('Please enter a valid email address');
-      return false;
+      nextErrors.email = 'Email Address is required';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        nextErrors.email = 'Please enter a valid email address';
+      }
     }
     if (!formData.password) {
-      setError('Password is required');
-      return false;
-    }
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
-      return false;
+      nextErrors.password = 'Password is required';
+    } else {
+      // Strong password: 8+ chars, upper, lower, number, special
+      const strongPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/;
+      if (!strongPwd.test(formData.password)) {
+        nextErrors.password = 'Use 8+ chars with upper, lower, number, special';
+      }
     }
     if (!formData.confirmPassword) {
-      setError('Please confirm your password');
-      return false;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return false;
+      nextErrors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      nextErrors.confirmPassword = 'Passwords do not match';
     }
     if (!formData.phone) {
-      setError('Phone Number is required');
-      return false;
+      nextErrors.phone = 'Phone Number is required';
+    } else if (formData.phone.length !== 10) {
+      nextErrors.phone = 'Phone Number must be exactly 10 digits';
     }
-    if (formData.phone.length !== 10) {
-      setError('Phone Number must be exactly 10 digits');
-      return false;
-    }
-    return true;
+    setErrors(prev => ({ ...prev, ...nextErrors }));
+    return Object.keys(nextErrors).length === 0;
   };
 
   // Validation function for step 1
   const validateStep1 = () => {
+    const nextErrors = {};
     if (!formData.businessName.trim()) {
-      setError('Business Name is required');
-      return false;
+      nextErrors.businessName = 'Business Name is required';
     }
     if (!formData.businessType) {
-      setError('Business Type is required');
-      return false;
+      nextErrors.businessType = 'Business Type is required';
     }
     if (!formData.businessAddress.trim()) {
-      setError('Business Address is required');
-      return false;
+      nextErrors.businessAddress = 'Business Address is required';
     }
-    return true;
+    setErrors(prev => ({ ...prev, ...nextErrors }));
+    return Object.keys(nextErrors).length === 0;
   };
 
   // Validation function for step 2
   const validateStep2 = () => {
     const validDepartments = departments.filter(d => d.trim());
     if (validDepartments.length === 0) {
-      setError('At least one department/service is required');
+      setFormError('At least one department/service is required');
       return false;
     }
     if (departments.some(d => !d.trim())) {
-      setError('Please fill in all department names or remove empty ones');
+      setFormError('Please fill in all department names or remove empty ones');
       return false;
     }
     return true;
@@ -135,66 +131,22 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setFormError('');
+    setErrors({});
 
     try {
       if (mode === 'signup') {
         // Validation for customer signup
         if (role === 'customer') {
-          if (!formData.name.trim()) {
-            setError('Full Name is required');
-            setLoading(false);
-            return;
-          }
-          if (!formData.email.trim()) {
-            setError('Email Address is required');
-            setLoading(false);
-            return;
-          }
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(formData.email)) {
-            setError('Please enter a valid email address');
-            setLoading(false);
-            return;
-          }
-          if (!formData.password) {
-            setError('Password is required');
-            setLoading(false);
-            return;
-          }
-          if (formData.password.length < 6) {
-            setError('Password must be at least 6 characters long');
-            setLoading(false);
-            return;
-          }
-          if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match');
-            setLoading(false);
-            return;
-          }
-          if (!formData.phone) {
-            setError('Phone Number is required');
-            setLoading(false);
-            return;
-          }
-          if (formData.phone.length !== 10) {
-            setError('Phone Number must be exactly 10 digits');
-            setLoading(false);
-            return;
-          }
+          if (!validateStep0()) { setLoading(false); return; }
         }
       } else if (mode === 'login') {
         // Login validation
-        if (!formData.email.trim()) {
-          setError('Email Address is required');
-          setLoading(false);
-          return;
-        }
-        if (!formData.password) {
-          setError('Password is required');
-          setLoading(false);
-          return;
-        }
+        const nextErrors = {};
+        if (!formData.email.trim()) nextErrors.email = 'Email Address is required';
+        if (!formData.password) nextErrors.password = 'Password is required';
+        setErrors(nextErrors);
+        if (Object.keys(nextErrors).length) { setLoading(false); return; }
       }
 
       // Simulate API call
@@ -225,7 +177,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
       window.location.reload();
 
     } catch (error) {
-      setError('Authentication failed. Please try again.');
+      setFormError('Authentication failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -233,7 +185,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
 
   const switchMode = () => {
     setMode(mode === 'login' ? 'signup' : 'login');
-    setError('');
+    setFormError('');
     setFormData({
       name: '',
       email: '',
@@ -249,16 +201,17 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
     setDepartments(['General Service']);
     setOperatingHours(defaultHours);
     setBusinessImages([]);
+    setErrors({});
   };
 
   const businessTypeOptions = [
-    { value: 'restaurant', label: '🍽️ Restaurant' },
-    { value: 'hospital', label: '🏥 Hospital/Clinic' },
-    { value: 'salon', label: '💇 Salon/Spa' },
-    { value: 'bank', label: '🏦 Bank' },
-    { value: 'government', label: '🏛️ Government Office' },
-    { value: 'retail', label: '🛍️ Retail Store' },
-    { value: 'other', label: '🏢 Other' }
+    { value: 'restaurant', label: 'Restaurant' },
+    { value: 'hospital', label: 'Hospital/Clinic' },
+    { value: 'salon', label: 'Salon/Spa' },
+    { value: 'bank', label: 'Bank' },
+    { value: 'government', label: 'Government Office' },
+    { value: 'retail', label: 'Retail Store' },
+    { value: 'other', label: 'Other' }
   ];
 
   const goNext = () => {
@@ -279,7 +232,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
   const goPrev = () => {
     if (mode === 'signup' && role === 'business_owner') {
       if (boStep > 0) {
-        setError(''); // Clear error when going back
+        setFormError(''); // Clear error when going back
         setBoStep(boStep - 1);
       }
     }
@@ -291,7 +244,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
     const copy = [...departments];
     copy[idx] = val;
     setDepartments(copy);
-    setError(''); // Clear error when typing
+    setFormError(''); // Clear error when typing
   };
 
   const updateHour = (idx, field, val) => {
@@ -322,14 +275,14 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               className={`role-btn ${role === 'customer' ? 'active' : ''}`}
               onClick={() => setRole('customer')}
             >
-              👤 Customer
+              Customer
             </button>
             <button
               type="button"
               className={`role-btn ${role === 'business_owner' ? 'active' : ''}`}
               onClick={() => setRole('business_owner')}
             >
-              🏢 Business Owner
+              Business Owner
             </button>
           </div>
         )}
@@ -349,7 +302,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               placeholder="Enter your full name"
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              icon="👤"
+              error={errors.name}
               required
             />
           )}
@@ -362,7 +315,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               placeholder="Enter your email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              icon="📧"
+              error={errors.email}
               required
             />
           )}
@@ -375,7 +328,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               placeholder="Enter your password"
               value={formData.password}
               onChange={(e) => handleInputChange('password', e.target.value)}
-              icon="🔒"
+              error={errors.password}
               required
             />
           )}
@@ -388,7 +341,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               placeholder="Confirm your password"
               value={formData.confirmPassword}
               onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-              icon="🔒"
+              error={errors.confirmPassword}
               required
             />
           )}
@@ -401,7 +354,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               placeholder="Enter 10-digit phone number"
               value={formData.phone}
               onChange={(e) => handleInputChange('phone', e.target.value)}
-              icon="📱"
+              error={errors.phone}
               required
               maxLength={10}
             />
@@ -414,7 +367,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               {boStep === 0 && (
                 <div>
                   <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-                    <button type="button" className="auth-btn" onClick={goNext}>Next</button>
+                    <Button type="button" variant="primary" onClick={goNext}>Next</Button>
                   </div>
                 </div>
               )}
@@ -428,7 +381,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     placeholder="Enter your business name"
                     value={formData.businessName}
                     onChange={(e) => handleInputChange('businessName', e.target.value)}
-                    icon="🏢"
+                    error={errors.businessName}
                     required
                   />
                   <InputField
@@ -438,7 +391,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     value={formData.businessType}
                     onChange={(e) => handleInputChange('businessType', e.target.value)}
                     options={businessTypeOptions}
-                    icon="🏷️"
+                    error={errors.businessType}
                     required
                   />
                   <InputField
@@ -447,7 +400,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     placeholder="Enter your business address"
                     value={formData.businessAddress}
                     onChange={(e) => handleInputChange('businessAddress', e.target.value)}
-                    icon="📍"
+                    error={errors.businessAddress}
                     required
                   />
                   <InputField
@@ -459,8 +412,8 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     rows="3"
                   />
                   <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-                    <button type="button" className="auth-btn" onClick={goPrev}>Previous</button>
-                    <button type="button" className="auth-btn" onClick={goNext}>Next</button>
+                    <Button type="button" variant="primary" onClick={goPrev}>Previous</Button>
+                    <Button type="button" variant="primary" onClick={goNext}>Next</Button>
                   </div>
                 </div>
               )}
@@ -478,21 +431,14 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                           onChange={(e) => updateDepartment(idx, e.target.value)}
                           required
                         />
-                        <button type="button" onClick={() => removeDepartment(idx)} style={{ color: '#ef4444', background: 'transparent', border: 'none', fontSize: 18 }}>🗑️</button>
+                        <Button type="button" variant="secondary" size="small" onClick={() => removeDepartment(idx)}>Remove</Button>
                       </div>
                     ))}
-                    <button
-                      type="button"
-                      onClick={addDepartment}
-                      className="auth-btn1"
-                      style={{ background: 'transparent', color: 'var(--color-primary)', border: '1px dashed var(--color-border)' }}
-                    >
-                      + Add Department
-                    </button>
+                    <Button type="button" variant="outline" size="small" onClick={addDepartment}>+ Add Department</Button>
                   </div>
                   <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                    <button type="button" className="auth-btn" onClick={goPrev}>Previous</button>
-                    <button type="button" className="auth-btn" onClick={goNext}>Next</button>
+                    <Button type="button" variant="primary" onClick={goPrev}>Previous</Button>
+                    <Button type="button" variant="primary" onClick={goNext}>Next</Button>
                   </div>
                 </div>
               )}
@@ -514,8 +460,8 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     ))}
                   </div>
                   <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                    <button type="button" className="auth-btn" onClick={goPrev}>Previous</button>
-                    <button type="button" className="auth-btn" onClick={goNext}>Next</button>
+                    <Button type="button" variant="secondary" onClick={goPrev}>Previous</Button>
+                    <Button type="button" variant="primary" onClick={goNext}>Next</Button>
                   </div>
                 </div>
               )}
@@ -529,7 +475,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     <input type="file" accept="image/*" multiple onChange={onImagesChange} />
                   </div>
                   <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                    <button type="button" className="auth-btn" onClick={goPrev}>Previous</button>
+                    <Button type="button" variant="primary" onClick={goPrev}>Previous</Button>
                   </div>
                 </div>
               )}
@@ -537,21 +483,21 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
           )}
 
           {/* Error message */}
-          {error && <div className="error-message">{error}</div>}
+          {formError && <div className="error-message">{formError}</div>}
 
           {/* Submit / Next control */}
           {(mode === 'signup' && role === 'business_owner') ? (
             boStep === totalBoSteps - 1 ? (
-              <button type="submit" className="auth-btn" disabled={loading}>
-                {loading ? '⏳ Please wait...' : 'Submit'}
-              </button>
+              <Button type="submit" variant="primary" disabled={loading}>
+                {loading ? 'Please wait...' : 'Submit'}
+              </Button>
             ) : (
               <></>
             )
           ) : (
-            <button type="submit" className="auth-btn" disabled={loading}>
-              {loading ? '⏳ Please wait...' : (mode === 'login' ? 'Sign In' : 'Create Account')}
-            </button>
+            <Button type="submit" variant="primary" disabled={loading}>
+              {loading ? 'Please wait...' : (mode === 'login' ? 'Sign In' : 'Create Account')}
+            </Button>
           )}
         </form>
 
