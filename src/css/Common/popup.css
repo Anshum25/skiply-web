@@ -116,20 +116,21 @@
 }
 
 .popup-close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: var(--color-muted);
-  cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
+    background: none;
+    border: none;
+    font-size: 35px;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0;
+    width: 0px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s 
+ease;
+    flex-shrink: 0;
 }
 
 .popup-close-btn:hover {
@@ -228,7 +229,7 @@
   }
   
   .popup-title {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 }
 
